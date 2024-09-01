@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The land is inhospitable and so are we</title>
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+            margin-left: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            margin-left: 20px;
+        }
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>The land is inhospitable and so are we</h1>
+    <p><i>Ce générateur permet de visualiser l'album en prenant en compte l'occurrence des mots au sein de tous les albums de Mitski.</i></p>
+    <form action="{{ url_for('generate') }}" method="post">
+
+        <br><br>
+
+        <!-- Slider pour le nombre minimum d'occurrences -->
+        <div class="form-group">
+            <label for="min_occurrences">Nombre minimum de répétitions de mots</label>
+            <input type="range" id="min_occurrences" name="min_occurrences" min="1" max="10" value="1" oninput="this.nextElementSibling.value = this.value">
+            <output></output>
+        </div>
+
+        <br><br>
+        
+        <!-- Case à cocher pour les albums uniques -->
+        <div class="form-group">
+            <label for="unique_albums">
+                <input type="checkbox" id="unique_albums" name="unique_albums">
+                Les mots doivent obligatoirement apparaître dans au moins deux albums différents
+            </label>
+        </div>
+
+        <br><br>
+
+        <!-- Sélection de la colormap -->
+        <div class="form-group">
+            <label>Couleur des mots</label>
+            <div class="colormap-option" id="viridis-option" onclick="selectColormap('viridis-option')">
+                <input type="radio" name="colormap" value="viridis">
+                <img src="{{ url_for('static', filename='maps/viridis.png') }}" alt="Viridis">
+            </div>
+            <div class="colormap-option" id="plasma-option" onclick="selectColormap('plasma-option')">
+                <input type="radio" name="colormap" value="plasma">
+                <img src="{{ url_for('static', filename='maps/plasma.png') }}" alt="Plasma">
+            </div>
+            <div class="colormap-option" id="gist_rainbow-option" onclick="selectColormap('gist_rainbow-option')">
+                <input type="radio" name="colormap" value="gist_rainbow">
+                <img src="{{ url_for('static', filename='maps/gist_rainbow.png') }}" alt="Gist Rainbow">
+            </div>
+            <div class="colormap-option" id="jet-option" onclick="selectColormap('jet-option')">
+                <input type="radio" name="colormap" value="jet">
+                <img src="{{ url_for('static', filename='maps/jet.png') }}" alt="Jet">
+            </div>
+        </div>
+
+        <br><br>
+
+        <!-- Bouton pour soumettre le formulaire -->
+        <button type="submit">Générer le fichier HTML</button>
+    </form>
+</body>
+</html>

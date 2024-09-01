@@ -3,15 +3,16 @@ import nltk
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 import re
+import sys
 
 ####### VARIABLES #######
 NB_ALBUMS = 7
 # Enlever les mots contenant des apostrophes ?
 CLEAN = False
 # Nombre de mots minimum dans tous les albums
-THRESHOLD = 1
+THRESHOLD = int(sys.argv[1])
 # Besoin de trouver le mot dans au moins 2 albums différents ?
-EPARSE = True 
+EPARSE = sys.argv[2].lower() == 'true'
 
 
 ####### FONCTIONS #######
