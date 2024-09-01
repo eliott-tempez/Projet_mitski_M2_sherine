@@ -7,6 +7,8 @@
         body {
             font-family: Georgia, sans-serif;
             margin-left: 20px;
+            background-color: #202020;
+            color: white;
         }
         .form-group {
             margin-bottom: 15px;
@@ -19,7 +21,7 @@
 </head>
 <body>
     <h1>The land is inhospitable and so are we</h1>
-    <p><i>Ce générateur permet de visualiser l'album en prenant en compte l'occurrence des mots au sein de tous les albums de Mitski.</i></p>
+    <p><i>Ce générateur permet de visualiser les paroles du dernier album de mitski en prenant en compte l'occurrence des mots au sein de tous les albums précédents.</i></p>
     <form action="{{ url_for('generate') }}" method="post">
 
         <br><br>
@@ -27,7 +29,7 @@
         <!-- Slider pour le nombre minimum d'occurrences -->
         <div class="form-group">
             <label for="min_occurrences">Nombre minimum de répétitions de mots</label>
-            <input type="range" id="min_occurrences" name="min_occurrences" min="1" max="10" value="1" oninput="this.nextElementSibling.value = this.value">
+            <input type="range" id="min_occurrences" name="min_occurrences" min="1" max="100" value="1" oninput="this.nextElementSibling.value = this.value">
             <output></output>
         </div>
 
