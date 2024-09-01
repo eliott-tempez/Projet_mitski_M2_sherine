@@ -12,7 +12,7 @@ CLEAN = False
 # Nombre de mots minimum dans tous les albums
 THRESHOLD = int(sys.argv[1])
 # Besoin de trouver le mot dans au moins 2 albums différents ?
-EPARSE = sys.argv[2].lower() == 'true'
+EPARSE = sys.argv[2]
 
 
 ####### FONCTIONS #######

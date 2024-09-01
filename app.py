@@ -13,16 +13,12 @@ def index():
     # Rendre la page d'accueil avec le formulaire
     return render_template('index.html')
 
-@app.route('/static/<path:filename>')
-def static_files(filename):
-    return send_from_directory('static', filename)
-
 @app.route('/generate', methods=['POST'])
 def generate():
     # Récupérer les valeurs du formulaire
     min_occurrences = request.form.get('min_occurrences', type=int)
     unique_albums = request.form.get('unique_albums') == 'on'
-    colormap = request.form.get('colormap', 'bwr')
+    colormap = request.form.get('colormap')
 
     # Exécuter le script pour générer le fichier d'occurrences
     subprocess.run(['python', 'generate_occurrences.py', str(min_occurrences), str(unique_albums)])
