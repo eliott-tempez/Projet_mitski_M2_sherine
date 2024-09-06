@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import subprocess  # Pour exécuter les scripts existants
+import subprocess
 import os
 
 app = Flask(__name__)
@@ -36,4 +36,4 @@ def serve_file():
 
 if __name__ == '__main__':
     # Démarrer l'application Flask
-    app.run(debug=True)
+    app.run()

@@ -16,15 +16,6 @@ EPARSE = sys.argv[2]
 
 
 ####### FONCTIONS #######
-""" Correction du bug des e mal codés"""
-def replace_e(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        content = f.read()
-    corrected_text = content.replace('е', 'e')
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(corrected_text)
-
-
 """ Lecture d'un fichier texte et retour du texte brut sans retour à la ligne"""
 def read_file(filename):
     plain_text = ""
@@ -107,9 +98,7 @@ if __name__ == "__main__":
     # Parcours des albums
     for i in range(1, NB_ALBUMS + 1):
         # Sous-dictionnaire
-        filename = f"./albums/Album{i}.txt"
-        # Correction de l'affichage du e 
-        replace_e(filename)
+        filename = f"data/album{i}.txt"
         # Lecture des fichiers
         plain_text = read_file(filename)
         # Nettoyage des mots
@@ -121,16 +110,10 @@ if __name__ == "__main__":
         
     # Ne garder que les mots avec un fréquence supérieure au seuil
     count_dict = keep_words(count_dict, THRESHOLD, NB_ALBUMS, EPARSE)
-    # Ecriture des fichiers
-    # Ordre décroissant
-    with open("./counter/mots_decroissant.txt", "w") as f:
+    
+    with open("output/mots_pour_html.txt", "w") as f:
         for i in range(NB_ALBUMS + 1):
             f.write(f"###### Album {i} ######\n{write_dict(count_dict[i], 'd')}\n")
-    
-    # Ordre alphabétique
-    with open("./counter/mots_alphab.txt", "w") as f:
-        for i in range(NB_ALBUMS + 1):
-            f.write(f"###### Album {i} ######\n{write_dict(count_dict[i], 'a')}\n")
 
         
         

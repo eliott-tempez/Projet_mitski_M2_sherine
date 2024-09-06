@@ -10,7 +10,7 @@ COLORMAP = sys.argv[1]
 if __name__ == "__main__":
     # lire occurences à partir du fichier
     word_counts = {}
-    with open("./counter/mots_alphab.txt", "r") as f_in:
+    with open("output/mots_pour_html.txt", "r") as f_in:
         f_in.readline()
         for line in f_in:
             if not re.match("^[a-z|'].*", line):
@@ -21,7 +21,7 @@ if __name__ == "__main__":
                 word_counts[mot] = occ
                 
     # Charger le texte depuis le fichier Album7.txt
-    with open('./albums/Album7.txt', 'r', encoding='utf-8') as file:
+    with open('data/album7.txt', 'r', encoding='utf-8') as file:
         album_text = file.read()
 
     # Trouver le nombre maximum et minimum d'occurrences
@@ -91,5 +91,5 @@ if __name__ == "__main__":
     html_output = template.render(formatted_text=formatted_text)
 
     # Sauvegarder le HTML dans un fichier
-    with open('./output/paroles_album.html', 'w', encoding='utf-8') as file:
+    with open('output/paroles_album.html', 'w', encoding='utf-8') as file:
         file.write(html_output)
