@@ -1,0 +1,8 @@
+name: projet_mitski
+channels:
+    - conda-forge
+dependencies:
+    - python
+    - matplotlib
+    - jinja2
+    - nltk
