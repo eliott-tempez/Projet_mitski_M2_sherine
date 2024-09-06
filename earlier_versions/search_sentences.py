@@ -1,14 +1,14 @@
+"""
+Ce script permet, pour chacun des mots du dernier album de Mitski, 
+d'obtenir toutes les phrases contenant ces mots dans chacun des six albums
+précédents. Le fichier texte créé est words_in_sentences.txt
+"""
+
+
 import re
 
+
 ####### FONCTIONS #######
-""" Correction du bug des e mal codés"""
-def replace_e(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        content = f.read()
-    corrected_text = content.replace('е', 'e')
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(corrected_text)
-        
 """ Lecture d'un fichier texte et retour du texte en minuscule sans ponctuation"""
 def read_file(filename):
     plain_text = ""
@@ -20,11 +20,11 @@ def read_file(filename):
             else:
                 plain_text += lowered        
     return plain_text
-        
+
+
 """Récupérer les mots uniques dans l'album de ref"""
 def get_unique_words(filename):
     unique_words = []
-    replace_e(filename)
     texte = read_file(filename)
     [unique_words.append(word) for word in texte.split() if word not in unique_words]
     return unique_words   
@@ -33,19 +33,15 @@ def get_unique_words(filename):
         
 if __name__ == "__main__":
     dico = {}
-    
-    # Album principal    
-    unique_words = get_unique_words("./albums/Album7.txt")
+    # récupérer les mots de l'album principal    
+    unique_words = get_unique_words("data/album7.txt")
     for w in unique_words:
         dico[w] = {}
-    
-    
-    # Chercher les mots
+   
+    # chercher les mots dans les autres albums
     for i in range(1, 7):
         # Sous-dictionnaire
-        filename = f"./albums/Album{i}.txt"
-        # Correction de l'affichage du e 
-        replace_e(filename)
+        filename = f"data/album{i}.txt"
         # Lecture des fichiers
         plain_text = read_file(filename)
         
@@ -62,8 +58,8 @@ if __name__ == "__main__":
                         dico[w][n_album] = {}
                     dico[w][n_album][n_ligne] = line
                     
-    # Fichier de sortie
-    with open("./counter/words_in_sentences.txt", "w") as f_out:
+    # Ecriture du fichier de sortie
+    with open("earlier_versions/outputs/words_in_sentences.txt", "w") as f_out:
         for word in dico:
             for n_album in dico[word]:
                 for n_ligne in dico[word][n_album]:
